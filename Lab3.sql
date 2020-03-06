@@ -1,5 +1,5 @@
-CREATE DATABASE CS145;
-USE CS145;
+CREATE DATABASE CS047;
+USE CS047;
 
 create table supplier(
 	sid int,
