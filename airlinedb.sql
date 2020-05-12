@@ -65,7 +65,7 @@ HAVING COUNT(*) > 3;
 -- 3      
 SELECT DISTINCT E.ename
 FROM EMPLOYEES E
-WHERE E.salary <( SELECT MIN(F.price) FROM FLIGHTS F WHERE F.ffrom = ‘Bangalore’ AND F.tto = ‘Frankfurt’ );
+WHERE E.salary <( SELECT MIN(F.price) FROM FLIGHTS F WHERE F.ffrom = 'Bangalore' AND F.tto = 'Frankfurt' );
 -- 4
 SELECT Temp.name, Temp.AvgSalary
 FROM ( SELECT A.aid, A.aname AS name, AVG (E.salary) AS AvgSalary
@@ -75,36 +75,36 @@ GROUP BY A.aid, A.aname )  Temp;
 -- 5
 SELECT DISTINCT E.ename
 FROM EMPLOYEES E, CERTIFIED C, AIRCRAFT A
-WHERE E.eid = C.eid AND C.aid = A.aid AND A.aname LIKE ‘Boeing’;
+WHERE E.eid = C.eid AND C.aid = A.aid AND A.aname LIKE 'Boeing';
 -- 6
 SELECT A.aid
 FROM AIRCRAFT A
 WHERE A.cruisingrange >( SELECT MIN (F.distance)
 FROM FLIGHTS F
-WHERE F.ffrom = ‘Bangalore’ AND F.tto = ‘Frankfurt’ );
+WHERE F.ffrom = 'Bangalore' AND F.tto = 'Frankfurt' );
 -- 7
 SELECT F.departs
 FROM FLIGHTS F
 WHERE F.flno IN ( ( SELECT F0.flno
 FROM FLIGHTS F0
-WHERE F0.ffrom = ‘Bangalore’ AND F0.tto = ‘Delhi’
+WHERE F0.ffrom = 'Bangalore' AND F0.tto = 'Delhi'
 AND extract(hour from F0.arrives) < 18 )
 UNION
 (SELECT F0.flno
  FROM FLIGHTS F0, FLIGHTS F1
- WHERE F0.ffrom = ‘Bangalore’ AND F0.tto <> ‘Delhi’
- AND F0.tto = F1.ffrom AND F1.tto = ‘Delhi’
+ WHERE F0.ffrom = 'Bangalore' AND F0.tto <> 'Delhi'
+ AND F0.tto = F1.ffrom AND F1.tto = 'Delhi'
  AND F1.departs > F0.arrives
  AND extract(hour from F1.arrives) < 18)
 UNION
 (SELECT F0.flno
  FROM FLIGHTS F0, FLIGHTS F1, FLIGHTS F2
- WHERE F0.ffrom = ‘Bangalore’
+ WHERE F0.ffrom = 'Bangalore'
  AND F0.tto = F1.ffrom
  AND F1.tto = F2.ffrom
- AND F2.tto = ‘Delhi’
- AND F0.tto <> ‘Delhi’
- AND F1.tto <> ‘Delhi’
+ AND F2.tto = 'Delhi'
+ AND F0.tto <> 'Delhi'
+ AND F1.tto <> 'Delhi'
  AND F1.departs > F0.arrives
  AND F2.departs > F1.arrives
  AND extract(hour from F2.arrives) < 18));
