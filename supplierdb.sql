@@ -19,7 +19,7 @@ where Parts.pid=Catalog.pid;
 select sname 
 from Supplier
 where not exists( select pid from Parts
-except
+not in
 select distinct pid 
 from Catalog
 where Catalog.sid=Supplier.sid);
