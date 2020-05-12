@@ -42,8 +42,7 @@ having count(D.customername) >=2);
 -- 2
 select BC.customername from Bank_Customer BC where not exists( 
 select branch_name from Branch where branch_city = 'Delhi' not in (
-select BA.branch_name f
-rom Depositor D , Bank_account BA where D.acc_no = BA.acc_no AND BC.customername = D.customername));
+select BA.branch_name from Depositor D , Bank_account BA where D.acc_no = BA.acc_no AND BC.customername = D.customername));
 
 -- 3
 delete from Bank_account 
