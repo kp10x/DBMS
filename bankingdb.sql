@@ -40,12 +40,11 @@ D.acc_no = BA.acc_no AND C.customername = D.customername AND BA.branch_name='SBI
 group by D.customername
 having count(D.customername) >=2);
 -- 2
-select BC.customername from Bank_Customer BC
-where not exists(
-select branch_name from Branch branch_city = 'Delhi'
-except
-select BA.branch_name from Depositor D , Bank_account BA
-where D.acc_no = BA.acc_no AND BC.customername = D.customername);
+select BC.customername from Bank_Customer BC where not exists( 
+select branch_name from Branch where branch_city = 'Delhi' not in (
+select BA.branch_name f
+rom Depositor D , Bank_account BA where D.acc_no = BA.acc_no AND BC.customername = D.customername));
+
 -- 3
 delete from Bank_account 
 where branch_name in (select branch_name 
