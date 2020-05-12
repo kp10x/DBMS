@@ -28,7 +28,6 @@ where Catalog.sid=Supplier.sid);
 select sname 
 from Supplier
 where not exists( select pid from Parts where color='Red'
-where pid
 not in
 (select distinct Catalog.pid 
 from Catalog , Parts
