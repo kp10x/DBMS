@@ -68,7 +68,7 @@ FROM EMPLOYEES E
 WHERE E.salary <( SELECT MIN(F.price) FROM FLIGHTS F WHERE F.ffrom = 'Bangalore' AND F.tto = 'Frankfurt' );
 -- 4
 SELECT Temp.name, Temp.AvgSalary
-FROM ( SELECT A.aid, A.aname AS name, AVG (E.salary) AS AvgSalary
+FROM ( SELECT A.aid, A.aname AS name, AVG(E.salary) AS AvgSalary
 FROM AIRCRAFT A, CERTIFIED C, EMPLOYEES E
 WHERE A.aid = C.aid AND C.eid = E.eid AND A.cruisingrange > 1000
 GROUP BY A.aid, A.aname )  Temp;
@@ -79,7 +79,7 @@ WHERE E.eid = C.eid AND C.aid = A.aid AND A.aname LIKE 'Boeing';
 -- 6
 SELECT A.aid
 FROM AIRCRAFT A
-WHERE A.cruisingrange >( SELECT MIN (F.distance)
+WHERE A.cruisingrange >( SELECT MIN(F.distance)
 FROM FLIGHTS F
 WHERE F.ffrom = 'Bangalore' AND F.tto = 'Frankfurt' );
 -- 7
