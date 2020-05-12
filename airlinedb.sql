@@ -49,56 +49,56 @@ select * from FLIGHTS;
 
 -- 1
 SELECT DISTINCT A.aname
-FROM Aircraft A
+FROM AIRCRAFT A
 WHERE A.Aid IN (SELECT C.aid
-FROM Certified C, Employees E
+FROM CERTIFIED C, EMPLOYEES E
 WHERE C.eid = E.eid AND
 NOT EXISTS ( SELECT *
-FROM Employees E1
+FROM EMPLOYEES E1
 WHERE E1.eid = E.eid AND E1.salary <80000 ));
 -- 2
 SELECT C.eid, MAX(A.cruisingrange)
-FROM Certified C, Aircraft A
+FROM CERTIFIED C, AIRCRAFT A
 WHERE C.aid = A.aid
 GROUP BY C.eid
 HAVING COUNT(*) > 3;
 -- 3      
 SELECT DISTINCT E.ename
-FROM Employees E
-WHERE E.salary <( SELECT MIN(F.price) FROM Flights F WHERE F.ffrom = ‘Bangalore’ AND F.tto = ‘Frankfurt’ );
+FROM EMPLOYEES E
+WHERE E.salary <( SELECT MIN(F.price) FROM FLIGHTS F WHERE F.ffrom = ‘Bangalore’ AND F.tto = ‘Frankfurt’ );
 -- 4
 SELECT Temp.name, Temp.AvgSalary
 FROM ( SELECT A.aid, A.aname AS name, AVG (E.salary) AS AvgSalary
-FROM Aircraft A, Certified C, Employees E
+FROM AIRCRAFT A, CERTIFIED C, EMPLOYEES E
 WHERE A.aid = C.aid AND C.eid = E.eid AND A.cruisingrange > 1000
 GROUP BY A.aid, A.aname )  Temp;
 -- 5
 SELECT DISTINCT E.ename
-FROM Employees E, Certified C, Aircraft A
+FROM EMPLOYEES E, CERTIFIED C, AIRCRAFT A
 WHERE E.eid = C.eid AND C.aid = A.aid AND A.aname LIKE ‘Boeing’;
 -- 6
 SELECT A.aid
-FROM Aircraft A
+FROM AIRCRAFT A
 WHERE A.cruisingrange >( SELECT MIN (F.distance)
-FROM Flights F
+FROM FLIGHTS F
 WHERE F.ffrom = ‘Bangalore’ AND F.tto = ‘Frankfurt’ );
 -- 7
 SELECT F.departs
-FROM Flights F
+FROM FLIGHTS F
 WHERE F.flno IN ( ( SELECT F0.flno
-FROM Flights F0
+FROM FLIGHTS F0
 WHERE F0.ffrom = ‘Bangalore’ AND F0.tto = ‘Delhi’
 AND extract(hour from F0.arrives) < 18 )
 UNION
 (SELECT F0.flno
- FROM Flights F0, Flights F1
+ FROM FLIGHTS F0, FLIGHTS F1
  WHERE F0.ffrom = ‘Bangalore’ AND F0.tto <> ‘Delhi’
  AND F0.tto = F1.ffrom AND F1.tto = ‘Delhi’
  AND F1.departs > F0.arrives
  AND extract(hour from F1.arrives) < 18)
 UNION
 (SELECT F0.flno
- FROM Flights F0, Flights F1, Flights F2
+ FROM FLIGHTS F0, FLIGHTS F1, FLIGHTS F2
  WHERE F0.ffrom = ‘Bangalore’
  AND F0.tto = F1.ffrom
  AND F1.tto = F2.ffrom
@@ -110,11 +110,11 @@ UNION
  AND extract(hour from F2.arrives) < 18));
 -- 8
 SELECT E.ename, E.salary
-FROM Employees E
+FROM EMPLOYEES E
 WHERE E.eid NOT IN ( SELECT DISTINCT C.eid
-FROM Certified C )
+FROM CERTIFIED C )
 AND E.salary >( SELECT AVG (E1.salary)
-FROM Employees E1
+FROM EMPLOYEES E1
 WHERE E1.eid IN
 (SELECT DISTINCT C1.eid
- FROM Certified C1 ) );
+ FROM CERTIFIED C1 ) );
