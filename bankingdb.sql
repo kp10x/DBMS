@@ -1,6 +1,6 @@
 -- Lab 2
 create table Branch(branch_name varchar(30),branch_city varchar(10),assets real,PRIMARY KEY (branch_name));
-create table Bank_account(acc_no int,branch_name varchar(30),balance real,PRIMARY KEY (acc_no),FOREIGN KEY (branch_name) REFERENCES BRANCH(branch_name));
+create table Bank_account(acc_no int,branch_name varchar(30),balance real,PRIMARY KEY (acc_no),FOREIGN KEY (branch_name) REFERENCES branch(branch_name));
 create table Bank_Customer(customername varchar(30),customerstreet varchar(30),customercity varchar(30),primary key (customername));
 create table Depositor(customername varchar(30),acc_no int,PRIMARY KEY (customername,acc_no),FOREIGN KEY (customername) REFERENCES Bank_Customer (customername),FOREIGN KEY (acc_no) REFERENCES Bank_account(acc_no));
 create table Loan(loan_num int,branch_name varchar(30),amount real,PRIMARY KEY (loan_num),FOREIGN KEY (branch_name) REFERENCES Branch(branch_name));
