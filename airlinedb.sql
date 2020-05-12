@@ -4,7 +4,7 @@ CREATE TABLE AIRCRAFT(AID INTEGER PRIMARY KEY,ANAME VARCHAR(10),CRUISINGRANGE IN
 CREATE TABLE EMPLOYEES(EID INTEGER PRIMARY KEY,ENAME VARCHAR(15),SALARY INTEGE
 CREATE TABLE CERTIFIED(EID INTEGER NOT NULL,AID INTEGER NOT NULL,PRIMARY KEY (EID, AID),FOREIGN KEY (EID) REFERENCES EMPLOYEES (EID),FOREIGN KEY (AID) REFERENCES AIRCRAFT (AID));
 
-insert into aircraft values(101,'747',3000),
+insert into AIRCRAFT values(101,'747',3000),
 (102,'Boeing',900),
 (103,'647',800),
 (104,'Dreamliner',10000),
@@ -12,7 +12,7 @@ insert into aircraft values(101,'747',3000),
 (106,'707',1500),
 (107,'Dream', 120000);
 
-insert into employees values(701,'A',50000),
+insert into EMPLOYEES values(701,'A',50000),
 (702,'B',100000),
 (703,'C',150000),
 (704,'D',90000),
@@ -20,7 +20,7 @@ insert into employees values(701,'A',50000),
 (706,'F',60000),
 (707,'G',90000);
 
-insert into certified values(701,101),
+insert into CERTIFIED values(701,101),
 (701,102),
 (701,106),
 (701,105),
@@ -35,17 +35,17 @@ insert into certified values(701,101),
 (704,105),
 (705,103);
 
-insert into flights values(101,'Bangalore','Delhi',2500,TIMESTAMP '2005-05-13 07:15:31',TIMESTAMP '2005-05-13 17:15:31',5000),
+insert into FLIGHTS values(101,'Bangalore','Delhi',2500,TIMESTAMP '2005-05-13 07:15:31',TIMESTAMP '2005-05-13 17:15:31',5000),
 (102,'Bangalore','Lucknow',3000,TIMESTAMP '2005-05-13 07:15:31',TIMESTAMP '2005-05-13 11:15:31',6000),
 (103,'Lucknow','Delhi',500,TIMESTAMP '2005-05-13 12:15:31',TIMESTAMP ' 2005-05-13 17:15:31',3000),
 (107,'Bangalore','Frankfurt',8000,TIMESTAMP '2005-05-13  07:15:31',TIMESTAMP '2005-05-13 22:15:31',60000),
 (104,'Bangalore','Frankfurt',8500,TIMESTAMP '2005-05-13 07:15:31',TIMESTAMP '2005-05-13 23:15:31',75000),
 (105,'Kolkata','Delhi',3400,TIMESTAMP '2005-05-13 07:15:31',TIMESTAMP  '2005-05-13 09:15:31',7000);
 
-select * from aircraft;
-select * from employees;
-select * from certified;
-select * from flights;
+select * from AIRCRAFT;
+select * from EMPLOYEES;
+select * from CERTIFIED;
+select * from FLIGHTS;
 
 -- 1
 SELECT DISTINCT A.aname
