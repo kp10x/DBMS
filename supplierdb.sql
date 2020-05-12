@@ -19,6 +19,7 @@ where Parts.pid=Catalog.pid;
 select sname 
 from Supplier
 where not exists( select pid from Parts
+where pid
 not in
 select distinct pid 
 from Catalog
@@ -27,10 +28,11 @@ where Catalog.sid=Supplier.sid);
 select sname 
 from Supplier
 where not exists( select pid from Parts where color='Red'
+where pid
 not in
-select distinct Catalog.pid 
+(select distinct Catalog.pid 
 from Catalog , Parts
-where Parts.pid=Catalog.pid and Parts.color='Red' and  Catalog.sid=Supplier.sid);
+where Parts.pid=Catalog.pid and Parts.color='Red' and  Catalog.sid=Supplier.sid));
 -- 4
 select pname
 from Parts,Catalog,Supplier
