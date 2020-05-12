@@ -25,7 +25,7 @@ insert into Loan values(
 
 select * from Branch;
 select * from Bank_account;
-select * from Bank_Customer
+select * from Bank_Customer;
 select * from Depositor;
 select * from Loan;
 
