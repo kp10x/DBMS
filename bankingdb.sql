@@ -4,7 +4,8 @@ create table Bank_account(acc_no int,branch_name varchar(30),balance real,PRIMAR
 create table Bank_Customer(customername varchar(30),customerstreet varchar(30),customercity varchar(30),primary key (customername));
 create table Depositor(customername varchar(30),acc_no int,PRIMARY KEY (customername,acc_no),FOREIGN KEY (customername) REFERENCES Bank_Customer (customername),FOREIGN KEY (acc_no) REFERENCES Bank_account(acc_no));
 create table Loan(loan_num int,branch_name varchar(30),amount real,PRIMARY KEY (loan_num),FOREIGN KEY (branch_name) REFERENCES Branch(branch_name));
-
+create table Borrower(cust_name varchar(20),loan_num int,foreign key(cust_name) references bankcust(cust_name),foreign key(loan_num) references Loan(loan_num));
+                                                                                                                                      
 insert into Branch values(
 'SBI_Chamrajpet','Bangalore',50000),
 ("SBI_ResidencyRoad","Bangalore",10000),
@@ -22,7 +23,9 @@ insert into Depositor values(
 "Avinash",1),("Dinesh",2),("Nikil",4),("Ravi",5),("Avinash",8),("Nikil",9),("Dinesh",10),("Nikil",11);
 insert into Loan values(
 1,"SBI_Chamrajpet",1000),(2,"SBI_ResidencyRoad",2000),(3,"SBI_ShivajiRoad",3000),(4,"SBI_ParliamentRoad",4000),(5,"SBI_Jantarmantar",5000);
-
+insert into Borrower values(
+'Avinash',1),('Dinesh',2),('Nikil',3),('Avinash',4),('Dinesh',5);
+                                                                                                                                                     
 select * from Branch;
 select * from Bank_account;
 select * from Bank_Customer;
