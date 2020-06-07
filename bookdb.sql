@@ -1,7 +1,7 @@
 -- Lab 7
 create table publisher(name varchar(20),phone real,address varchar(20),primary key (name));
 create table book(book_id int,title varchar(20),year varchar(20),publisher_name varchar(20),primary key (book_id),foreign key (publisher_name) references publisher(name) on delete cascade);
-create table authors(author_name varchar(20),book_id int,primary key(book_id,author_name),foreign key (book_id) references book(book_id) on delete cascade)
+create table authors(author_name varchar(20),book_id int,primary key(book_id,author_name),foreign key (book_id) references book(book_id) on delete cascade);
 create table library_branch(branch_id int,branch_name varchar(20),address varchar(20),primary key (branch_id));
 create table book_copies(book_id int,branch_id int,no_copies int,primary key (book_id,branch_id),foreign key (book_id) references book(book_id) on delete cascade,foreign key (branch_id) references library_branch(branch_id) on delete cascade);
 create table card( card_no int, primary key (card_no));
